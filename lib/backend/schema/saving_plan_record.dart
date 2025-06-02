@@ -1,0 +1,160 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+import '/backend/schema/enums/enums.dart';
+
+import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+
+class SavingPlanRecord extends FirestoreRecord {
+  SavingPlanRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
+
+  // "title" field.
+  String? _title;
+  String get title => _title ?? '';
+  bool hasTitle() => _title != null;
+
+  // "amount" field.
+  double? _amount;
+  double get amount => _amount ?? 0.0;
+  bool hasAmount() => _amount != null;
+
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
+  // "period" field.
+  String? _period;
+  String get period => _period ?? '';
+  bool hasPeriod() => _period != null;
+
+  // "month" field.
+  String? _month;
+  String get month => _month ?? '';
+  bool hasMonth() => _month != null;
+
+  // "startDate" field.
+  DateTime? _startDate;
+  DateTime? get startDate => _startDate;
+  bool hasStartDate() => _startDate != null;
+
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  bool hasUid() => _uid != null;
+
+  // "currentProgress" field.
+  double? _currentProgress;
+  double get currentProgress => _currentProgress ?? 0.0;
+  bool hasCurrentProgress() => _currentProgress != null;
+
+  void _initializeFields() {
+    _title = snapshotData['title'] as String?;
+    _amount = castToType<double>(snapshotData['amount']);
+    _category = snapshotData['category'] as String?;
+    _period = snapshotData['period'] as String?;
+    _month = snapshotData['month'] as String?;
+    _startDate = snapshotData['startDate'] as DateTime?;
+    _uid = snapshotData['uid'] as String?;
+    _currentProgress = castToType<double>(snapshotData['currentProgress']);
+  }
+
+  static CollectionReference get collection =>
+      FirebaseFirestore.instance.collection('saving_plan');
+
+  static Stream<SavingPlanRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => SavingPlanRecord.fromSnapshot(s));
+
+  static Future<SavingPlanRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => SavingPlanRecord.fromSnapshot(s));
+
+  static SavingPlanRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      SavingPlanRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static SavingPlanRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      SavingPlanRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'SavingPlanRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is SavingPlanRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
+}
+
+Map<String, dynamic> createSavingPlanRecordData({
+  String? title,
+  double? amount,
+  String? category,
+  String? period,
+  String? month,
+  DateTime? startDate,
+  String? uid,
+  double? currentProgress,
+}) {
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'title': title,
+      'amount': amount,
+      'category': category,
+      'period': period,
+      'month': month,
+      'startDate': startDate,
+      'uid': uid,
+      'currentProgress': currentProgress,
+    }.withoutNulls,
+  );
+
+  return firestoreData;
+}
+
+class SavingPlanRecordDocumentEquality implements Equality<SavingPlanRecord> {
+  const SavingPlanRecordDocumentEquality();
+
+  @override
+  bool equals(SavingPlanRecord? e1, SavingPlanRecord? e2) {
+    return e1?.title == e2?.title &&
+        e1?.amount == e2?.amount &&
+        e1?.category == e2?.category &&
+        e1?.period == e2?.period &&
+        e1?.month == e2?.month &&
+        e1?.startDate == e2?.startDate &&
+        e1?.uid == e2?.uid &&
+        e1?.currentProgress == e2?.currentProgress;
+  }
+
+  @override
+  int hash(SavingPlanRecord? e) => const ListEquality().hash([
+        e?.title,
+        e?.amount,
+        e?.category,
+        e?.period,
+        e?.month,
+        e?.startDate,
+        e?.uid,
+        e?.currentProgress
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is SavingPlanRecord;
+}

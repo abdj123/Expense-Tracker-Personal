@@ -1,0 +1,22 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "allUserTransactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "firebaseDate",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
